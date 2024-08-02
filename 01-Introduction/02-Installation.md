@@ -33,15 +33,18 @@ have python2 or python3 installed on them.
   $ pip3 install ansible --user
 ```
 
-**Script to add user, password and enable password authentication**
+**Script to add user, password and enable password authentication and install ansible on ubuntu**
 ```
 #!/bin/bash
-$ sudo useradd -d /home/ansible -s /bin/bash -m ansible
-$ sudo echo "ansible:ansible" | chpasswd
-$ sudo echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
-$ sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
-$ sudo sed -i "/^[^#]*PermitRootLogin[[:space:]]no/c\PermitRootLogin yes" /etc/ssh/sshd_config
-$ sudo systemctl restart ssh
-$ sudo service sshd restart
+sudo useradd -d /home/ansible -s /bin/bash -m ansible
+sudo echo "ansible:ansible" | chpasswd
+sudo echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo sed -i "/^[^#]*PermitRootLogin[[:space:]]no/c\PermitRootLogin yes" /etc/ssh/sshd_config
+sudo systemctl restart ssh
+sudo service sshd restart
+sudo su - ansible 
+sudo apt-add-repository ppa:ansible/ansible 
+sudo apt install ansible -y
 ```
 
